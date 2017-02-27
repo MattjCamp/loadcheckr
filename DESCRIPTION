@@ -4,9 +4,12 @@ Title: Check Database Table Load
 Version: 0.1.0
 Author: Matt Campbell
 Maintainer: Matt Campbell <mjcampbell74@gmail.com>
-Description: Compare rows, data types and content in two tables in two data connections
+Description: Compare rows, data types and content in two tables in two data
+    connections
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports:
-  dbr
+    dbr,
+    coder
+RoxygenNote: 5.0.1
