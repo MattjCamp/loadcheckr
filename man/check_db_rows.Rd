@@ -4,16 +4,16 @@
 \alias{check_db_rows}
 \title{Check Row Counts}
 \usage{
-check_db_rows(conn_a, table_, conn_b, table_b)
+check_db_rows(conn_a, table_name_a, conn_b, table_name_b)
 }
 \arguments{
 \item{conn_a}{the first dbr data connection}
 
 \item{conn_b}{the second dbr data connection}
 
-\item{table_b}{the second table name}
-
 \item{table_a}{the first table name}
+
+\item{table_b}{the second table name}
 }
 \value{
 a list of objects describing the results, prints out to the log as well

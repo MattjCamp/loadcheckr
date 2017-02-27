@@ -14,7 +14,10 @@ library(testthat)
 
 test_that("check_db_rows", {
 
-  expect_error({1 == 0})
+  check <- check_db_rows(conn_a = conn_a,
+                         table_name_a = table_name_a,
+                         conn_b = conn_b,
+                         table_name_b = table_name_b)
 
 })
 
