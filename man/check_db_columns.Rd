@@ -12,6 +12,8 @@ check_db_columns(conn_a, table_name_a, conn_b, table_name_b,
 
 \item{conn_b}{the second dbr data connection}
 
+\item{ignore_case}{ignore case when comparing column names}
+
 \item{table_a}{the first table name}
 
 \item{table_b}{the second table name}

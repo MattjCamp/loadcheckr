@@ -21,4 +21,15 @@ test_that("check_db_rows", {
 
 })
 
+test_that("check_db_row_keys_match", {
+
+  check <- check_db_row_keys_match(conn_a = conn_a,
+                                   table_name_a = table_name_a,
+                                   conn_b = conn_b,
+                                   table_name_b = table_name_b,
+                                   key_field = "person_id")
+
+})
+
+
 source("close_connections.R")

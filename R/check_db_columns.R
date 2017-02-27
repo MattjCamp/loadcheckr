@@ -6,6 +6,7 @@
 #' @param table_a the first table name
 #' @param conn_b the second dbr data connection
 #' @param table_b the second table name
+#' @param ignore_case ignore case when comparing column names
 #' @description Checks whether the data sources agree on data types: any numeric == any numeric, any character == any character
 #' @export
 #' @return a list of objects describing the results, prints out to the log as well
