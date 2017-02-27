@@ -1,0 +1,36 @@
+# HISTORY FILES
+
+.Rhistory
+.Rapp.history
+
+# R
+
+.RData
+
+# EXAMPLE CODE
+
+*-Ex.R
+
+# RSTUDIO
+
+.Rproj.user/
+.Rproj.user
+packrat/lib*/
+*.utf8.md
+*.knit.md
+/*.Rcheck/
+/*.tar.gz
+/*_cache/
+/cache/
+
+# VIGNETTES
+
+vignettes/*.html
+vignettes/*.pdf
+
+# BIG DATA SOURCES
+
+*.db
+*.csv
+*.rdata
+*.sas7bdat
