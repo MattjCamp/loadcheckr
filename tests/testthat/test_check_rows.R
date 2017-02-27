@@ -31,5 +31,17 @@ test_that("check_db_row_keys_match", {
 
 })
 
+test_that("check_db_random_sample", {
+
+  check <- check_db_random_sample(conn_a = conn_a,
+                                  table_name_a = table_name_a,
+                                  conn_b = conn_b,
+                                  table_name_b = table_name_b,
+                                  key_field = "person_id",
+                                  key_field_index = c(2,41),
+                                  num_rows = 1)
+
+})
+
 
 source("close_connections.R")
