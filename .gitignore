@@ -34,3 +34,4 @@ vignettes/*.pdf
 *.csv
 *.rdata
 *.sas7bdat
+tests/testthat/open_connections.R
