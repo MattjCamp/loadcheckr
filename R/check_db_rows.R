@@ -21,10 +21,10 @@ check_db_rows <- function(conn_a, table_name_a, conn_b, table_name_b) {
     coderr::code_sql_count() %>%
     dbr::pull_data(conn_b)
 
-  report <- data.frame(list(check = "num rows",
+  report <- data.frame(list(match = a$n == b$n,
                             table_a = a$n,
-                            table_b = b$n,
-                            match = a$n == b$n))
+                            table_b = b$n),
+                            tables = sprintf("%s :: %s", table_name_a, table_name_b))
 
   print(report)
 

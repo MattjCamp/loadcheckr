@@ -18,7 +18,7 @@ check_db_random_sample <- function(conn_a, table_name_a, conn_b, table_name_b,
 
   r <-
     sprintf("select %s as key_field from %s", key_field, table_name_a) %>%
-    pull_data(conn) %>%
+    pull_data(conn_a) %>%
     distinct(key_field) %>%
     sample_n(size = num_rows)
 
@@ -34,11 +34,12 @@ check_db_random_sample <- function(conn_a, table_name_a, conn_b, table_name_b,
       pull_data(conn)
 
     names(d) <- str_to_lower(names(d))
+    key <- as.vector(sapply(d[key_field_index], as.character))
 
-    d[, key_field_index] <-  as.character(d[, key_field_index])
+    d[key_field_index] <- key
 
     d
-
+    
   }
 
   a <- get_records_for_key(conn = conn_a, table_name = table_name_a) %>%

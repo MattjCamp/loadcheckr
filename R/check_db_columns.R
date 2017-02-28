@@ -23,7 +23,7 @@ check_db_columns <- function(conn_a, table_name_a, conn_b, table_name_b, ignore_
     n <- str_to_upper(names(d))
     m <- sapply(d, mode)[1:length(d)]
     m <- as.character(m)
-    o <- row.names(d)
+    o <- 1:length(names(d))
 
     d <- data.frame(list(data_type = m,
                          column = n,
