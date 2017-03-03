@@ -4,19 +4,13 @@
 \alias{check_db_rows}
 \title{Check Row Counts}
 \usage{
-check_db_rows(conn_a, table_name_a, conn_b, table_name_b)
+check_db_rows(ref)
 }
 \arguments{
-\item{conn_a}{the first dbr data connection}
-
-\item{conn_b}{the second dbr data connection}
-
-\item{table_a}{the first table name}
-
-\item{table_b}{the second table name}
+\item{ref}{\link[loadcheckr]{check_db_references} object that holds the connections and tables that you are comparing}
 }
 \value{
-a list of objects describing the results, prints out to the log as well
+dataframe listing out the results of the test
 }
 \description{
 Checks the number of rows in both data tables

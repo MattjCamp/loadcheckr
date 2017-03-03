@@ -1,71 +1,40 @@
 
-#' Check Columns
+#' Check Column Meta Data
 #'
-#' Checks the column names and data types in both data tables
-#' @param conn_a the first dbr data connection
-#' @param table_a the first table name
-#' @param conn_b the second dbr data connection
-#' @param table_b the second table name
-#' @param ignore_case ignore case when comparing column names
-#' @description Checks whether the data sources agree on data types: any numeric == any numeric, any character == any character
+#' Checks the column names, column lengths and data types in both data tables
+#' @param ref \link[loadcheckr]{check_db_references} object that holds the connections and tables that you are comparing
 #' @export
-#' @return a list of objects describing the results, prints out to the log as well
+#' @return dataframe listing out the results of the test
 
-check_db_columns <- function(conn_a, table_name_a, conn_b, table_name_b, ignore_case = FALSE) {
+check_db_columns <- function(ref) {
 
-  library(tidyverse)
+  library(magrittr)
 
-  get_column_information <- function(conn, table_name){
+  x <- show_columns(ref$conn_x, ref$schema_x, ref$table_name_x)
+  y <- show_columns(ref$conn_y, ref$schema_y, ref$table_name_y)
 
-    d <- sprintf("select * from %s", table_name) %>%
-      coderr::code_sql_head(1) %>%
-      dbr::pull_data(conn)
-    n <- str_to_upper(names(d))
-    m <- sapply(d, mode)[1:length(d)]
-    m <- as.character(m)
-    o <- 1:length(names(d))
-
-    d <- data.frame(list(data_type = m,
-                         column = n,
-                         order = o)) %>%
-      long(2)
-
-    d
-
-  }
-
-  a <- get_column_information(conn = conn_a,
-                              table_name = table_name_a)
-
-  b <- get_column_information(conn = conn_b,
-                              table_name = table_name_b)
-
-  # CLEAN
-
-  if (ignore_case) {
-    a <- a %>% mutate(column = str_to_lower(column))
-    b <- b %>% mutate(column = str_to_lower(column))
-  }
-
-  # COMPARE
-
-  dp <- datapointsr::data_points(a, b)
-  comp <- show_values(dp)
-
-  # NUM COLUMNS
-
-  report <- data.frame(list(check = "num columns",
-                            table_a = a %>% filter(variable == "data_type") %>% nrow(),
-                            table_b = b %>% filter(variable == "data_type") %>% nrow(),
-                            match = isTRUE(comp$match$equal == TRUE)))
-
-  print(report)
+  common <-
+    inner_join(x, y, by = c("table_name", "column_name")) %>%
+    mutate(check = "check_db_columns",
+           match = "common") %>%
+    select(check, match, everything()) %>%
+    mutate(match_data_type =  data_type.x ==  data_type.y,
+           match_col_length = col_length.x == col_length.y,
+           match_col_order = column_order.x == column_order.y)
+  only_in_x <- anti_join(x, y, by = c("table_name", "column_name")) %>%
+    mutate(check = "check_db_columns",
+           match = "only_in_x") %>%
+    select(check, match, everything())
+  only_in_y <- anti_join(y, x, by = c("table_name", "column_name")) %>%
+    mutate(check = "check_db_columns",
+           match = "only_in_y") %>%
+    select(check, match, everything())
 
   me <- list()
+  me$common <- common
 
-  me$report <- report
-  if (!is.null(comp$mis_matched))
-    me$mis_matched <- comp$mis_matched
+  if (nrow(only_in_x) != 0 & nrow(only_in_y) != 0 )
+      me$mismatched <- bind_rows(only_in_x, only_in_y)
 
   me
 

@@ -2,29 +2,17 @@
 % Please edit documentation in R/check_db_columns.R
 \name{check_db_columns}
 \alias{check_db_columns}
-\title{Check Columns}
+\title{Check Column Meta Data}
 \usage{
-check_db_columns(conn_a, table_name_a, conn_b, table_name_b,
-  ignore_case = FALSE)
+check_db_columns(ref)
 }
 \arguments{
-\item{conn_a}{the first dbr data connection}
-
-\item{conn_b}{the second dbr data connection}
-
-\item{ignore_case}{ignore case when comparing column names}
-
-\item{table_a}{the first table name}
-
-\item{table_b}{the second table name}
+\item{ref}{\link[loadcheckr]{check_db_references} object that holds the connections and tables that you are comparing}
 }
 \value{
-a list of objects describing the results, prints out to the log as well
+dataframe listing out the results of the test
 }
 \description{
-Checks whether the data sources agree on data types: any numeric == any numeric, any character == any character
-}
-\details{
-Checks the column names and data types in both data tables
+Checks the column names, column lengths and data types in both data tables
 }
 

@@ -2,32 +2,29 @@
 #' Check Row Counts
 #'
 #' Checks the number of rows in both data tables
-#' @param conn_a the first dbr data connection
-#' @param table_a the first table name
-#' @param conn_b the second dbr data connection
-#' @param table_b the second table name
+#' @param ref \link[loadcheckr]{check_db_references} object that holds the connections and tables that you are comparing
 #' @export
-#' @return a list of objects describing the results, prints out to the log as well
+#' @return dataframe listing out the results of the test
 
-check_db_rows <- function(conn_a, table_name_a, conn_b, table_name_b) {
+check_db_rows <- function(ref) {
 
-  library(tidyverse)
+  library(magrittr)
 
-  a <- sprintf("select * from %s", table_name_a) %>%
+  x <- sprintf("select * from %s.%s", ref$schema_x, ref$table_name_x) %>%
     coderr::code_sql_count() %>%
-    dbr::pull_data(conn_a)
+    dbr::pull_data(ref$conn_x)
 
-  b <- sprintf("select * from %s", table_name_b) %>%
+  y <- sprintf("select * from %s.%s", ref$schema_y, ref$table_name_y) %>%
     coderr::code_sql_count() %>%
-    dbr::pull_data(conn_b)
+    dbr::pull_data(ref$conn_y)
 
-  report <- data.frame(list(match = a$n == b$n,
-                            table_a = a$n,
-                            table_b = b$n),
-                            tables = sprintf("%s :: %s", table_name_a, table_name_b))
+  d <- data.frame(list(check = "check_db_rows",
+                       match = x$n == y$n,
+                       n_x = x$n,
+                       n_y = y$n),
+                       tables = sprintf("%s.%s :: %s.%s", ref$schema_x, ref$table_name_x,
+                                        ref$schema_y, ref$table_name_y))
 
-  print(report)
-
-  report
+  d
 
 }
