@@ -62,6 +62,6 @@ check_db_random_sample <- function(ref, keys, num_rows) {
 
   dp <- data_points(x, y)
 
-  show_values(dp)
+  match_data_points(dp)
 
 }
