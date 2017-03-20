@@ -4,12 +4,10 @@
 \alias{check_db_random_sample}
 \title{Check Random Row Sample}
 \usage{
-check_db_random_sample(ref, keys, num_rows)
+check_db_random_sample(ref, num_rows)
 }
 \arguments{
 \item{ref}{\link[loadcheckr]{check_db_references} object that holds the connections and tables that you are comparing}
-
-\item{keys}{the list of keys that will uniquely identify rows}
 
 \item{num_rows}{the number of rows that you will randomly sample}
 }

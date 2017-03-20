@@ -5,7 +5,7 @@
 \title{Holds References to Connections}
 \usage{
 check_db_references(conn_x, schema_x, table_name_x, conn_y, schema_y,
-  table_name_y)
+  table_name_y, keys = NULL)
 }
 \arguments{
 \item{conn_x}{the first dbr data connection}

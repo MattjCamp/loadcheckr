@@ -12,15 +12,17 @@
 #' @return a list of dbr data connections and table names that can be compared
 
 check_db_references <- function(conn_x, schema_x, table_name_x,
-                                conn_y, schema_y, table_name_y) {
+                                conn_y, schema_y, table_name_y,
+                                keys = NULL) {
 
   me <- list()
-  me$conn_x = conn_x
-  me$schema_x = schema_x
-  me$table_name_x = table_name_x
-  me$conn_y = conn_y
-  me$schema_y = schema_y
-  me$table_name_y = table_name_y
+  me$conn_x <- conn_x
+  me$schema_x <- schema_x
+  me$table_name_x <- table_name_x
+  me$conn_y <- conn_y
+  me$schema_y <- schema_y
+  me$table_name_y <- table_name_y
+  me$keys <- keys
 
   me
 

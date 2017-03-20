@@ -17,16 +17,16 @@ test_that("check_db_rows", {
 })
 
 test_that("check_db_keys", {
-  check_db_keys(ref2, keys)
+  check_db_keys(ref2)
 })
 
 test_that("check_db_random_sample", {
 
-  check_db_random_sample(ref = ref1,
-                         keys = keys,
-                         num_rows = 5)
+  t <- check_db_random_sample(ref = ref1,
+                              num_rows = 5)
+  t <- t$ds
+  t %>% group_by(is, variable) %>% count()
 
 })
-
 
 source("close_connections.R")

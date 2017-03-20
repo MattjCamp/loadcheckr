@@ -3,16 +3,15 @@
 #'
 #' Checks all the content in a randomly selected set of rows. This function ignores data column case.
 #' @param ref \link[loadcheckr]{check_db_references} object that holds the connections and tables that you are comparing
-#' @param keys the list of keys that will uniquely identify rows
 #' @param num_rows the number of rows that you will randomly sample
 #' @export
 #' @return dataframe listing out the results of the test
 
-check_db_random_sample <- function(ref, keys, num_rows) {
+check_db_random_sample <- function(ref, num_rows) {
 
   library(magrittr)
 
-  k <- stringr::str_to_lower(coderr::code_vector_to_csv_list(keys, FALSE, FALSE))
+  k <- stringr::str_to_lower(coderr::code_vector_to_csv_list(ref$keys, FALSE, FALSE))
 
   k <-
     sprintf("select %s from %s.%s", k, ref$schema_x, ref$table_name_x) %>%
@@ -49,16 +48,19 @@ check_db_random_sample <- function(ref, keys, num_rows) {
 
   x <- get_records_for_key(conn = ref$conn_x, schema = ref$schema_x,
                            table_name = ref$table_name_x)
-  x <- x %>% long(match(keys, table = names(x)))
+  x <- x %>% long(match(ref$keys, table = names(x)))
 
   y <- get_records_for_key(conn = ref$conn_y, schema = ref$schema_y,
                            table_name = ref$table_name_y)
-  y <- y %>% long(match(keys, table = names(y)))
+  y <- y %>% long(match(ref$keys, table = names(y)))
 
   for (i in 1:length(names(x)))
     x[i] <- as.vector(sapply(x[i], as.character))
   for (i in 1:length(names(y)))
     y[i] <- as.vector(sapply(y[i], as.character))
+
+  x <- x %>% mutate(value = ifelse(is.na(value), " ", value))
+  y <- y %>% mutate(value = ifelse(is.na(value), " ", value))
 
   dp <- data_points(x, y)
 

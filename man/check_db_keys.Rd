@@ -4,12 +4,10 @@
 \alias{check_db_keys}
 \title{Check Keys}
 \usage{
-check_db_keys(ref, keys)
+check_db_keys(ref)
 }
 \arguments{
 \item{ref}{\link[loadcheckr]{check_db_references} object that holds the connections and tables that you are comparing}
-
-\item{keys}{the list of keys that will uniquely identify rows}
 }
 \value{
 dataframe listing out the results of the test
