@@ -59,8 +59,8 @@ check_db_random_sample <- function(ref, num_rows) {
   for (i in 1:length(names(y)))
     y[i] <- as.vector(sapply(y[i], as.character))
 
-  x <- x %>% mutate(value = ifelse(is.na(value), " ", value))
-  y <- y %>% mutate(value = ifelse(is.na(value), " ", value))
+  # x <- x %>% mutate(value = ifelse(is.na(value), " ", value))
+  # y <- y %>% mutate(value = ifelse(is.na(value), " ", value))
 
   dp <- data_points(x, y)
 

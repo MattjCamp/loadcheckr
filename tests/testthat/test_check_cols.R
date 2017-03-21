@@ -7,7 +7,9 @@ library(testthat)
 
 test_that("check_db_columns", {
 
-  check_db_columns(ref3)
+  t <- check_db_columns(ref3)
+
+  t %>% group_by(is, match_data_type, match_col_length, match_col_order) %>% count()
 
 })
 
