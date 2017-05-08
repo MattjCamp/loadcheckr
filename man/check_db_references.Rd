@@ -26,4 +26,3 @@ a list of dbr data connections and table names that can be compared
 \description{
 Holds references to both data connections and the tables being compared
 }
-

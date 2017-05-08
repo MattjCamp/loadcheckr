@@ -1,7 +1,7 @@
 Package: loadcheckr
 Type: Package
 Title: Check Database Table Load
-Version: 0.1.6
+Version: 0.1.7
 Author: Matt Campbell
 Maintainer: Matt Campbell <mjcampbell74@gmail.com>
 Description: Compare rows, data types and content in two tables in two data
@@ -14,4 +14,4 @@ Imports:
     dbr,
     coderr,
     datapointsr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

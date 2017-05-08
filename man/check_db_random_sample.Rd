@@ -17,4 +17,3 @@ dataframe listing out the results of the test
 \description{
 Checks all the content in a randomly selected set of rows. This function ignores data column case.
 }
-

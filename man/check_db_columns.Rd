@@ -15,4 +15,3 @@ dataframe listing out the results of the test
 \description{
 Checks the column names, column lengths and data types in both data tables
 }
-

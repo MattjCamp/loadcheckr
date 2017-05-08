@@ -15,4 +15,3 @@ dataframe listing out the results of the test
 \description{
 Checks the number of rows in both data tables
 }
-
